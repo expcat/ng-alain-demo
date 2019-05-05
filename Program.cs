@@ -15,12 +15,18 @@ namespace NgAlainDemo
         {
             CreateHostBuilder(args).Build().Run();
         }
+        public static readonly Dictionary<string, string> _devConfig =
+            new Dictionary<string, string> { { "--dev", "dev" } };
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+            .ConfigureAppConfiguration((hostingContext, config) =>
+            {
+                config.AddCommandLine(args, _devConfig);
+            })
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseStartup<Startup>();
+            });
     }
 }

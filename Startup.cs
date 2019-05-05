@@ -75,7 +75,7 @@ namespace NgAlainDemo
             {
                 spa.Options.SourcePath = "ClientApp";
 
-                if (Environment.IsDevelopment())
+                if (Environment.IsDevelopment() && Configuration["dev"].Equals("dev", StringComparison.OrdinalIgnoreCase))
                 {
                     spa.UseAngularCliServer(npmScript: "dev");
                 }
